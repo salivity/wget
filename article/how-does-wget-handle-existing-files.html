@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does Wget Handle Existing Files? - wget</title>
+    <meta name="description" content="When you use the wget command to download a file that already exists in your destination directory, its default behavior is to save a new copy of the file rather than overwriting the original. It achieves this by automatically appending a numeric suffix">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-does-wget-handle-existing-files">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Does Wget Handle Existing Files? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-does-wget-handle-existing-files" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When you use the wget command to download a file that already exists in your destination directory, its default behavior is to save a new copy of the file rather than overwriting the original. It achieves this by automatically appending a numeric suffix" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-does-wget-handle-existing-files">How Does Wget Handle
+Existing Files?</h1>
+<p>When you use the <code>wget</code> command to download a file that
+already exists in your destination directory, its default behavior is to
+save a new copy of the file rather than overwriting the original. It
+achieves this by automatically appending a numeric suffix (such as
+<code>.1</code>, <code>.2</code>, etc.) to the end of the new file name.
+However, <code>wget</code> is highly versatile and offers several
+command-line flags that allow you to change this behavior, enabling you
+to overwrite the existing file, skip the download entirely, or resume a
+partially completed transfer.</p>
+<h2 id="default-behavior-unique-suffixes">Default Behavior: Unique
+Suffixes</h2>
+<p>If you run <code>wget</code> without any special flags and the file
+you are downloading already exists in the target folder, the utility
+protects your local data from being overwritten.</p>
+<ul>
+<li><strong>The Suffix System:</strong> <code>wget</code> checks the
+filename. If <code>file.pdf</code> exists, the newly downloaded file is
+saved as <code>file.pdf.1</code>. If you run the command again, the next
+one becomes <code>file.pdf.2</code>.</li>
+<li><strong>The Log Output:</strong> In your terminal, <code>wget</code>
+will explicitly state that it is redirecting the output, showing a
+message like <code>Saving to: ‘file.pdf.1’</code>.</li>
+</ul>
+<h2 id="alternative-behaviors-and-flags">Alternative Behaviors and
+Flags</h2>
+<p>You can modify how <code>wget</code> interacts with existing files
+depending on your specific workflow or automation needs.</p>
+<h3 id="overwriting-existing-files">Overwriting Existing Files</h3>
+<p>If you want to replace the local file with the freshly downloaded
+version, use the lowercase <code>-O</code> (output document) flag. This
+forces <code>wget</code> to route the download directly into the
+specified filename, overwriting whatever is currently there.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> filename.ext URL</span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> Be careful with the <code>-O</code> flag when
+downloading multiple URLs at once, as it will concatenate all downloads
+into that single file.</p>
+</blockquote>
+<h3 id="skipping-already-downloaded-files">Skipping Already Downloaded
+Files</h3>
+<p>If your goal is to avoid wasting bandwidth on files you already have,
+use the <code>-nc</code> (no-clobber) flag. When this flag is active,
+<code>wget</code> checks if the file exists and, if it does, immediately
+terminates the operation without downloading anything.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-nc</span> URL</span></code></pre></div>
+<h3 id="resuming-interrupted-downloads">Resuming Interrupted
+Downloads</h3>
+<p>If a file exists because a previous download attempt was cut short,
+you can use the <code>-c</code> (continue) flag. Instead of starting
+over or creating a <code>.1</code> file, <code>wget</code> looks at the
+size of the local file and asks the server to send only the remaining
+pieces.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-c</span> URL</span></code></pre></div>
+<h3 id="server-side-timestamping">Server-Side Timestamping</h3>
+<p>Another intelligent option is the <code>-N</code> (timestamping)
+flag. When used, <code>wget</code> checks the modification date of the
+file on the remote server. It will only download the file if the remote
+version is newer than your local copy, making it ideal for maintaining
+updated backups.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-N</span> URL</span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

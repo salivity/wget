@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Send Custom HTTP Headers With Wget? - wget</title>
+    <meta name="description" content="You can easily send a custom HTTP header with a wget request by using the --header option followed by your specific header name and value enclosed in quotes. This capability is essential for simulating specific browser behaviors, passing authentication t">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-send-custom-http-headers-with-wget">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Send Custom HTTP Headers With Wget? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-send-custom-http-headers-with-wget" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="You can easily send a custom HTTP header with a wget request by using the --header option followed by your specific header name and value enclosed in quotes. This capability is essential for simulating specific browser behaviors, passing authentication t" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-send-custom-http-headers-with-wget">How to Send Custom
+HTTP Headers With Wget?</h1>
+<p>You can easily send a custom HTTP header with a wget request by using
+the <code>--header</code> option followed by your specific header name
+and value enclosed in quotes. This capability is essential for
+simulating specific browser behaviors, passing authentication tokens,
+testing API endpoints, or bypassing basic server-side restrictions. This
+article will guide you through the exact syntax for adding single or
+multiple headers, practical real-world examples, and common use cases
+for web scraping and development.</p>
+<h3 id="the-basic-syntax-for-custom-headers">The Basic Syntax for Custom
+Headers</h3>
+<p>The standard syntax for including a custom header in your
+<code>wget</code> command requires the <code>--header</code> flag. The
+format looks like this:</p>
+<p><code>wget --header="Header-Name: Header-Value" URL</code></p>
+<p>For example, if you want to send a custom tracking header called
+<code>X-My-Header</code> with a value of <code>12345</code> to a test
+server, you would run the following command in your terminal:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;X-My-Header: 12345&quot;</span> http://example.com</span></code></pre></div>
+<h3 id="sending-multiple-http-headers">Sending Multiple HTTP
+Headers</h3>
+<p>In many scenarios, a single header is not enough. You might need to
+send an authorization token while simultaneously specifying the content
+type. To send multiple custom headers, you simply repeat the
+<code>--header</code> option for each individual header you want to
+include.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;Authorization: Bearer xyz123&quot;</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;Accept: application/json&quot;</span> http://example.com/api</span></code></pre></div>
+<h3 id="common-real-world-use-cases">Common Real-World Use Cases</h3>
+<p>Modifying headers allows you to interact with web servers more
+effectively. Here are three of the most frequent scenarios where custom
+headers are required:</p>
+<ul>
+<li><strong>Mimicking a Specific Browser (User-Agent):</strong> Some
+websites block default <code>wget</code> requests to prevent automated
+scraping. You can spoof a standard web browser by modifying the
+<code>User-Agent</code> header.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)&quot;</span> http://example.com</span></code></pre></div>
+<ul>
+<li><strong>Setting a Cookie Header:</strong> If you need to access a
+page that requires a session cookie without managing a cookie file, you
+can pass it directly via the headers.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;Cookie: session_id=abcde98765&quot;</span> http://example.com/dashboard</span></code></pre></div>
+<ul>
+<li><strong>Specifying Host Headers:</strong> When testing a website
+before DNS changes have propagated, you can point <code>wget</code> to
+an IP address but specify the intended domain using the
+<code>Host</code> header.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;Host: www.yourdomain.com&quot;</span> http://192.0.2.1/index.html</span></code></pre></div>
+<h3 id="using-the-shorthand-alternative">Using the Shorthand
+Alternative</h3>
+<p>If you prefer shorter commands, <code>wget</code> also supports a
+single-dash lowercase alias for the header flag, which is
+<code>-e</code> combined with the <code>http_proxy</code> or custom
+header definitions, but the official single-character shorthand
+specifically for headers is <code>-O</code> for output and
+<code>--header</code> for headers. However, if you are looking for the
+shortest native flag, <code>wget</code> relies primarily on
+<code>--header</code>. If you find yourself typing long strings
+frequently, you can also add permanent headers to your local
+<code>~/.wgetrc</code> configuration file using the
+<code>header = </code> syntax.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

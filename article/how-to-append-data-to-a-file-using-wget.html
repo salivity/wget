@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Append Data to a File Using Wget? - wget</title>
+    <meta name="description" content="When downloading data from the internet using the wget command-line utility, you may occasionally need to append new content to the end of an existing local file rather than overwriting it or creating a duplicate. While wget does not have a single, direc">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-append-data-to-a-file-using-wget">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Append Data to a File Using Wget? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-append-data-to-a-file-using-wget" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When downloading data from the internet using the wget command-line utility, you may occasionally need to append new content to the end of an existing local file rather than overwriting it or creating a duplicate. While wget does not have a single, direc" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-append-data-to-a-file-using-wget">How to Append Data to a
+File Using Wget?</h1>
+<p>When downloading data from the internet using the <code>wget</code>
+command-line utility, you may occasionally need to append new content to
+the end of an existing local file rather than overwriting it or creating
+a duplicate. While <code>wget</code> does not have a single, direct
+"append" flag designed specifically to concatenate new downloads to the
+bottom of standard text files, you can achieve this behavior by using
+the standard output option (<code>-O -</code>) and combining it with
+standard shell redirection operators (<code>&gt;&gt;</code>). This guide
+will walk you through the precise commands needed to append downloaded
+web data directly to an existing file, resume interrupted downloads, and
+handle multiple URLs efficiently.</p>
+<h3 id="appending-web-content-to-an-existing-file">Appending Web Content
+to an Existing File</h3>
+<p>To append the contents of a URL to a file that already exists on your
+system, you must instruct <code>wget</code> to send the downloaded data
+to standard output (the terminal screen) instead of saving it to a new
+file. You can then use the shell's append redirection operator
+(<code>&gt;&gt;</code>) to route that data to the end of your target
+file.</p>
+<p>The syntax for this operation is:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> <span class="at">-</span> <span class="st">&quot;URL&quot;</span> <span class="op">&gt;&gt;</span> filename.txt</span></code></pre></div>
+<ul>
+<li><strong><code>-O -</code></strong>: The uppercase <code>-O</code>
+flag specifies the output file destination. Passing a hyphen
+(<code>-</code>) as the filename tells <code>wget</code> to redirect the
+downloaded content to standard output.</li>
+<li><strong><code>&gt;&gt;</code></strong>: This is the shell
+redirection operator that appends data to the end of the specified file.
+If the file does not exist, it will be created.</li>
+</ul>
+<p>For example, if you want to append log data from a remote server to a
+local file named <code>master_log.txt</code>, you would run:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> <span class="at">-</span> <span class="st">&quot;https://example.com/daily_log.txt&quot;</span> <span class="op">&gt;&gt;</span> master_log.txt</span></code></pre></div>
+<h3 id="continuing-an-interrupted-download">Continuing an Interrupted
+Download</h3>
+<p>If your goal is not to combine two different pieces of data, but
+rather to resume a large, partially downloaded file that was cut off,
+you should use the continuation flag (<code>-c</code> or
+<code>--continue</code>) instead of shell redirection.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-c</span> <span class="st">&quot;https://example.com/largefile.zip&quot;</span></span></code></pre></div>
+<p>When you use the <code>-c</code> flag, <code>wget</code> looks at the
+local directory for a file with the same name, checks its size, and asks
+the remote server to send only the remaining bytes, effectively
+appending the rest of the data to the existing incomplete file.</p>
+<h3 id="appending-multiple-downloads-to-a-single-file">Appending
+Multiple Downloads to a Single File</h3>
+<p>If you have a list of multiple URLs and you want to download and
+append all of their contents into one single master file, you can
+combine <code>wget</code>'s input file flag (<code>-i</code>) with the
+standard output and redirection method.</p>
+<p>First, create a text file (e.g., <code>urls.txt</code>) containing
+one URL per line. Then, execute the following command:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> <span class="at">-</span> <span class="at">-i</span> urls.txt <span class="op">&gt;&gt;</span> combined_outputs.txt</span></code></pre></div>
+<p>This commands reads every URL listed in <code>urls.txt</code>,
+streams the downloaded data sequentially, and appends the entire
+collective output into <code>combined_outputs.txt</code>.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

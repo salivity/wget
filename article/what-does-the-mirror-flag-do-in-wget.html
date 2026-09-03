@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Does the Mirror Flag Do in wget? - wget</title>
+    <meta name="description" content="The wget command-line tool is a popular utility for downloading files from the web, and its mirror flag (-m or --mirror) is the ultimate shortcut for backing up or duplicating entire websites. This flag acts as a master switch that enables a specific com">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/what-does-the-mirror-flag-do-in-wget">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What Does the Mirror Flag Do in wget? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/what-does-the-mirror-flag-do-in-wget" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The wget command-line tool is a popular utility for downloading files from the web, and its mirror flag (-m or --mirror) is the ultimate shortcut for backing up or duplicating entire websites. This flag acts as a master switch that enables a specific com" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="what-does-the-mirror-flag-do-in-wget">What Does the Mirror Flag
+Do in wget?</h1>
+<p>The <code>wget</code> command-line tool is a popular utility for
+downloading files from the web, and its mirror flag (<code>-m</code> or
+<code>--mirror</code>) is the ultimate shortcut for backing up or
+duplicating entire websites. This flag acts as a master switch that
+enables a specific combination of options designed to systematically
+crawl a site and download all of its assets. By understanding how the
+mirror flag works and combining it with a few other essential
+parameters, you can efficiently create offline archives of web pages
+while respecting server resources.</p>
+<h3 id="the-anatomy-of-the-mirror-flag">The Anatomy of the Mirror
+Flag</h3>
+<p>When you use <code>-m</code> or <code>--mirror</code> in a
+<code>wget</code> command, you aren't just turning on a single feature.
+Instead, <code>wget</code> automatically activates a bundle of four
+distinct settings optimized for website replication:</p>
+<ul>
+<li><strong>Time-stamping (<code>-N</code>):</strong> This ensures that
+<code>wget</code> only downloads files if the remote version is newer
+than your local copy. It prevents you from wasting bandwidth
+redownloading unchanged data during subsequent runs.</li>
+<li><strong>Infinite Recursion (<code>-r</code> with
+<code>l inf</code>):</strong> Standard recursion in <code>wget</code>
+stops after five levels of links. The mirror flag sets the recursion
+depth to infinity, allowing the tool to follow links as deep as the
+website goes.</li>
+<li><strong>Keep Directory Listing
+(<code>--no-remove-listing</code>):</strong> This tells
+<code>wget</code> to retain the FTP directory listings
+(<code>.listing</code> files) generated during the process, which is
+useful for tracking structure.</li>
+</ul>
+<p>In practice, running <code>wget -m https://example.com</code> is
+identical to running
+<code>wget -r -l inf -N --no-remove-listing https://example.com</code>,
+but much easier to type and remember.</p>
+<h3 id="crucial-companion-flags-for-local-browsing">Crucial Companion
+Flags for Local Browsing</h3>
+<p>If your goal is to download a website so you can browse it offline on
+your local computer, simply using <code>-m</code> is often not enough.
+Website links will still point to the live internet URL (e.g.,
+<code>https://example.com/about</code>) rather than your local files. To
+fix this, you should combine the mirror flag with a few other
+options:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-m</span> <span class="at">-k</span> <span class="at">-p</span> <span class="at">-E</span> https://example.com</span></code></pre></div>
+<p>Here is what those additional flags do to make your mirrored site
+fully functional offline:</p>
+<ul>
+<li><strong><code>-k</code> (<code>--convert-links</code>):</strong>
+After the download is complete, this converts the links in the documents
+to point to your local files so you can click through the site
+offline.</li>
+<li><strong><code>-p</code> (<code>--page-requisites</code>):</strong>
+This forces <code>wget</code> to download all necessary assets to
+display the page correctly, such as images, CSS stylesheets, and sound
+files, even if they aren't explicitly linked in the main HTML
+recursion.</li>
+<li><strong><code>-E</code> (<code>--adjust-extension</code>):</strong>
+If a page ends in an unconventional extension or has no extension at all
+(like a CGI or PHP generated page), this forces <code>wget</code> to
+append <code>.html</code> to the filename so your local browser opens it
+properly.</li>
+</ul>
+<h3 id="best-practices-and-server-etiquette">Best Practices and Server
+Etiquette</h3>
+<p>Mirroring a website can put a heavy load on the host server because
+<code>wget</code> requests pages much faster than a human browsing the
+site would. To avoid getting your IP address banned or accidentally
+crashing a small server, it is highly recommended to introduce a delay
+between requests using the <code>-w</code> or <code>--wait</code>
+flag.</p>
+<p>For example, adding <code>-w 2</code> tells <code>wget</code> to wait
+two seconds between every file it downloads. You can also use
+<code>--random-wait</code> to vary the delay between 0.5 and 1.5 times
+your specified wait time, making the traffic pattern look more natural
+to server firewalls.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

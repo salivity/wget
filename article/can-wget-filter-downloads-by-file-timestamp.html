@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can wget filter downloads by file timestamp? - wget</title>
+    <meta name="description" content="The wget command line utility can absolutely filter downloads based on the modification timestamp of files on a remote server. By using specific built-in options, wget evaluates whether a local file already exists and compares its timestamp with the file">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/can-wget-filter-downloads-by-file-timestamp">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Can wget filter downloads by file timestamp? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/can-wget-filter-downloads-by-file-timestamp" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The wget command line utility can absolutely filter downloads based on the modification timestamp of files on a remote server. By using specific built-in options, wget evaluates whether a local file already exists and compares its timestamp with the file" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="can-wget-filter-downloads-by-file-timestamp">Can wget filter
+downloads by file timestamp?</h1>
+<p>The <code>wget</code> command line utility can absolutely filter
+downloads based on the modification timestamp of files on a remote
+server. By using specific built-in options, <code>wget</code> evaluates
+whether a local file already exists and compares its timestamp with the
+file on the server. If the server's file is newer, the utility downloads
+it; otherwise, it skips the download, saving both time and bandwidth.
+This feature is particularly useful for mirroring websites, automating
+backups, and syncing data efficiently.</p>
+<h2 id="understanding-time-stamping-in-wget">Understanding Time-Stamping
+in wget</h2>
+<p>By default, <code>wget</code> does not automatically check timestamps
+to skip files unless you explicitly tell it to do so. When you enable
+time-stamping, <code>wget</code> sends a special request to the server
+to check the <code>Last-Modified</code> header of the remote file before
+initiating a full download.</p>
+<p>To enable this behavior, you use the <strong><code>-N</code></strong>
+(or <code>--timestamping</code>) option.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-N</span> https://example.com/file.zip</span></code></pre></div>
+<p>When you run this command, <code>wget</code> takes the following
+actions:</p>
+<ul>
+<li><strong>Checks for a local file:</strong> It looks for a file with
+the same name in your current directory.</li>
+<li><strong>Compares timestamps:</strong> If the file exists,
+<code>wget</code> examines its local modification time against the
+remote file's timestamp.</li>
+<li><strong>Decides to download:</strong> If the remote file is newer
+(or if the file sizes differ), <code>wget</code> fetches the new version
+and updates the local file's modification time to match the server. If
+the local file is newer or identical, the download is skipped.</li>
+</ul>
+<h2 id="key-options-for-time-based-filtering">Key Options for Time-Based
+Filtering</h2>
+<p>Beyond the standard <code>-N</code> flag, <code>wget</code> offers a
+few variations and complementary settings to fine-tune how it handles
+file timestamps.</p>
+<h3 id="1-the-timestamping-option--n">1. The Timestamping Option
+(<code>-N</code>)</h3>
+<p>As the primary tool for this task, it is best used for recurring
+downloads or cron jobs where you only want updates.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--timestamping</span> https://example.com/data.csv</span></code></pre></div>
+<h3 id="2-combining-with-mirroring--m">2. Combining with Mirroring
+(<code>-m</code>)</h3>
+<p>If you want to back up an entire directory or website while
+respecting timestamps, use the mirror flag. The <code>-m</code> option
+automatically turns on <code>-N</code> (timestamping), along with
+infinite recursion and preservation of directory listings.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-m</span> https://example.com/downloads/</span></code></pre></div>
+<h3 id="3-backing-up-local-files---backup-converted">3. Backing Up Local
+Files (<code>--backup-converted</code>)</h3>
+<p>When syncing, if you want to keep your old local files instead of
+overwriting them when a newer server file is found, you can pair your
+command with backup options so older versions are renamed rather than
+lost.</p>
+<h2 id="important-limitations-to-keep-in-mind">Important Limitations to
+Keep in Mind</h2>
+<p>While filtering by modification date is highly effective, its success
+relies entirely on the server's configuration and protocol.</p>
+<ul>
+<li><strong>Server Support:</strong> <code>wget</code> relies on HTTP
+headers (like <code>Last-Modified</code>) or FTP directory listings to
+read timestamps. If a web server dynamically generates pages or hides
+modification headers, <code>wget</code> won't be able to determine the
+file's age and may download it anyway.</li>
+<li><strong>Local Clock Accuracy:</strong> Because <code>wget</code>
+compares the remote time to your local file system time, ensure your
+local system clock is properly synchronized (via NTP) to avoid false
+comparisons.</li>
+<li><strong>HTTP vs. FTP:</strong> On FTP servers, <code>wget</code>
+parses the remote directory listing to find dates. On HTTP/HTTPS
+servers, it sends a <code>HEAD</code> request to read the file metadata
+before deciding whether to send a <code>GET</code> request for the
+actual data.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

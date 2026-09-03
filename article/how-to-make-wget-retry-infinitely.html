@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Make Wget Retry Infinitely? - wget</title>
+    <meta name="description" content="The wget command-line utility is a powerful tool for downloading files from the web, but network instability can often interrupt long-running transfers. By default, wget will give up after a specified number of failed attempts. However, you can configure">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-make-wget-retry-infinitely">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Make Wget Retry Infinitely? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-make-wget-retry-infinitely" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The wget command-line utility is a powerful tool for downloading files from the web, but network instability can often interrupt long-running transfers. By default, wget will give up after a specified number of failed attempts. However, you can configure" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-make-wget-retry-infinitely">How to Make Wget Retry
+Infinitely?</h1>
+<p>The <code>wget</code> command-line utility is a powerful tool for
+downloading files from the web, but network instability can often
+interrupt long-running transfers. By default, <code>wget</code> will
+give up after a specified number of failed attempts. However, you can
+configure it to retry an infinite number of times by using the
+<code>--tries=0</code> or <code>-t 0</code> option. This article
+explains how to implement this setting, combines it with other useful
+flags for persistent downloads, and highlights important considerations
+when running infinite retry loops.</p>
+<h2 id="setting-wget-tries-to-infinite">Setting Wget Tries to
+Infinite</h2>
+<p>When automating scripts or downloading large files over unreliable
+connections, you can force <code>wget</code> to keep trying forever
+until the download succeeds. In <code>wget</code>, setting the retry
+limit to <code>0</code> or <code>inf</code> tells the program never to
+give up.</p>
+<p>You can use either the short-form or long-form syntax:</p>
+<ul>
+<li><strong>Short Option:</strong> <code>wget -t 0 [URL]</code></li>
+<li><strong>Long Option:</strong> <code>wget --tries=0 [URL]</code></li>
+<li><strong>Alternative Keyword:</strong>
+<code>wget --tries=inf [URL]</code></li>
+</ul>
+<p>For example, to download a large ISO file with infinite retries, you
+would run:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-t</span> 0 https://example.com/largefile.iso</span></code></pre></div>
+<h2 id="best-practices-for-persistent-downloads">Best Practices for
+Persistent Downloads</h2>
+<p>While infinite retries ensure that <code>wget</code> won't stop due
+to connection drops, combining it with other specific flags creates a
+much more robust and resilient download process.</p>
+<h3 id="1-enable-resuming-with--c">1. Enable Resuming with
+<code>-c</code></h3>
+<p>If you use <code>-t 0</code> without the resume flag,
+<code>wget</code> might restart the download from the beginning (<span
+class="math inline">\(0\%\)</span> bytes) every time the connection
+drops. To prevent this and save bandwidth, pair it with the
+<code>--continue</code> or <code>-c</code> option so it picks up right
+where it left off.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-t</span> 0 <span class="at">-c</span> https://example.com/largefile.iso</span></code></pre></div>
+<h3 id="2-handle-read-timeouts-with---timeout">2. Handle Read Timeouts
+with <code>--timeout</code></h3>
+<p>Sometimes a connection doesn't drop completely; instead, it "hangs"
+and stalls indefinitely. By default, <code>wget</code> might wait a long
+time before considering a stalled connection as failed. You can speed up
+the retry trigger by setting a read timeout in seconds.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-t</span> 0 <span class="at">-c</span> <span class="at">--timeout</span><span class="op">=</span>15 https://example.com/largefile.iso</span></code></pre></div>
+<h3 id="3-adjust-wait-time-between-retries">3. Adjust Wait Time Between
+Retries</h3>
+<p>To avoid overwhelming a server or getting your IP address temporarily
+blocked for spamming requests, you can add a wait period between retry
+attempts using the <code>--wait</code> flag.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-t</span> 0 <span class="at">-c</span> <span class="at">--wait</span><span class="op">=</span>10 https://example.com/largefile.iso</span></code></pre></div>
+<h2 id="important-caveats">Important Caveats</h2>
+<p>Before leaving an infinite <code>wget</code> script running in the
+background, keep the following scenarios in mind:</p>
+<ul>
+<li><strong>Permanent Errors (404 Not Found):</strong> Wget is smart
+enough to recognize fatal HTTP errors. If the server responds with a
+<code>404 Not Found</code> or <code>403 Forbidden</code>,
+<code>wget</code> will stop immediately because retrying will not fix a
+missing file or permission issue. Infinite retries only apply to network
+timeouts, connection resets, and temporary server errors (like
+<code>503 Service Unavailable</code>).</li>
+<li><strong>Server Bans:</strong> Continually hammering a server that is
+experiencing an outage can lead to your IP address being blacklisted by
+automated firewalls or security plugins like Fail2ban. Always use a
+reasonable <code>--wait</code> time if you suspect the server is
+struggling.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use Wget with a Proxy Environment Variable? - wget</title>
+    <meta name="description" content="This article provides a quick overview and practical guide on how to configure and use the wget command-line utility with a proxy server defined via environment variables. You will learn how to set temporary or permanent environment variables for both HT">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-use-wget-with-a-proxy-environment-variable">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Use Wget with a Proxy Environment Variable? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-use-wget-with-a-proxy-environment-variable" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a quick overview and practical guide on how to configure and use the wget command-line utility with a proxy server defined via environment variables. You will learn how to set temporary or permanent environment variables for both HT" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-use-wget-with-a-proxy-environment-variable">How to Use
+Wget with a Proxy Environment Variable?</h1>
+<p>This article provides a quick overview and practical guide on how to
+configure and use the <code>wget</code> command-line utility with a
+proxy server defined via environment variables. You will learn how to
+set temporary or permanent environment variables for both HTTP and HTTPS
+traffic, how to prompt <code>wget</code> to automatically recognize
+these settings, and how to bypass them when necessary. By the end of
+this guide, you will be able to seamlessly route your command-line
+downloads through your organization's or personal proxy server.</p>
+<h2 id="setting-up-proxy-environment-variables">Setting Up Proxy
+Environment Variables</h2>
+<p>To make <code>wget</code> use a proxy server, the utility looks for
+specific environment variables in your system. You can define these
+variables in your terminal session.</p>
+<ul>
+<li><strong>HTTP Proxy:</strong> Used for standard unencrypted
+traffic.</li>
+<li><strong>HTTPS Proxy:</strong> Used for secure, encrypted
+traffic.</li>
+</ul>
+<p>To set these variables in a Linux or macOS terminal, use the
+<code>export</code> command:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">http_proxy</span><span class="op">=</span><span class="st">&quot;http://proxy.example.com:8080&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">https_proxy</span><span class="op">=</span><span class="st">&quot;http://proxy.example.com:8080&quot;</span></span></code></pre></div>
+<p>If your proxy server requires authentication, you can include your
+username and password directly within the URL format:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">http_proxy</span><span class="op">=</span><span class="st">&quot;http://username:password@proxy.example.com:8080&quot;</span></span></code></pre></div>
+<h2 id="verifying-wget-proxy-initialization">Verifying Wget Proxy
+Initialization</h2>
+<p>By default, <code>wget</code> is built to automatically look for and
+read the <code>http_proxy</code> and <code>https_proxy</code>
+environment variables. When you run a standard <code>wget</code>
+command, it will automatically route the request through the specified
+server.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://example.com/file.zip</span></code></pre></div>
+<p>You can explicitly tell <code>wget</code> to use environmental proxy
+settings by modifying its configuration file (<code>~/.wgetrc</code>) or
+by ensuring the proxy feature is not disabled. The configuration file
+uses the following syntax to activate proxy reading:</p>
+<pre class="text"><code>use_proxy = on
+</code></pre>
+<h2 id="how-to-bypass-the-proxy-configuration">How to Bypass the Proxy
+Configuration</h2>
+<p>There are times when you might have proxy environment variables
+active, but you need to bypass them for a specific request (for example,
+downloading a file from a local network server).</p>
+<h3 id="option-1-the-command-line-flag">Option 1: The Command-Line
+Flag</h3>
+<p>You can override the environment variables on a per-command basis by
+using the <code>--no-proxy</code> flag:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--no-proxy</span> http://local-server.internal/data.csv</span></code></pre></div>
+<h3 id="option-2-the-no_proxy-environment-variable">Option 2: The
+<code>no_proxy</code> Environment Variable</h3>
+<p>Alternatively, you can define a <code>no_proxy</code> environment
+variable. This variable contains a comma-separated list of domains or IP
+addresses that <code>wget</code> should always connect to directly,
+ignoring the proxy settings:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">no_proxy</span><span class="op">=</span><span class="st">&quot;localhost,127.0.0.1,local-server.internal&quot;</span></span></code></pre></div>
+<h2 id="making-the-proxy-settings-permanent">Making the Proxy Settings
+Permanent</h2>
+<p>The <code>export</code> command only applies to your current terminal
+session. If you close the terminal window, the settings are lost. To
+make these proxy environment variables permanent for your user account,
+append the export commands to your shell's profile configuration file,
+such as <code>~/.bashrc</code>, <code>~/.bash_profile</code>, or
+<code>~/.zshrc</code>.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&#39;export http_proxy=&quot;http://proxy.example.com:8080&quot;&#39;</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&#39;export https_proxy=&quot;http://proxy.example.com:8080&quot;&#39;</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span></code></pre></div>
+<p>After updating the file, apply the changes to your current session by
+sourcing the file:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

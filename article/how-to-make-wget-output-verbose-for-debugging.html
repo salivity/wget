@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Make Wget Output Verbose for Debugging - wget</title>
+    <meta name="description" content="This article provides a quick overview of how to increase the verbosity of the wget command-line tool to troubleshoot and debug network connection or download issues. You will learn the specific flags required to reveal detailed request and response head">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-make-wget-output-verbose-for-debugging">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Make Wget Output Verbose for Debugging - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-make-wget-output-verbose-for-debugging" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a quick overview of how to increase the verbosity of the wget command-line tool to troubleshoot and debug network connection or download issues. You will learn the specific flags required to reveal detailed request and response head" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-make-wget-output-verbose-for-debugging">How to Make Wget
+Output Verbose for Debugging</h1>
+<p>This article provides a quick overview of how to increase the
+verbosity of the <code>wget</code> command-line tool to troubleshoot and
+debug network connection or download issues. You will learn the specific
+flags required to reveal detailed request and response headers, how to
+log this data to an external file, and how to interpret the expanded
+output for effective troubleshooting.</p>
+<h2 id="understanding-wget-verbosity-levels">Understanding Wget
+Verbosity Levels</h2>
+<p>By default, <code>wget</code> operates in a standard reporting mode,
+showing a basic progress bar, download speed, and essential HTTP status
+codes. When a download fails due to SSL/TLS handshake errors,
+authentication issues, or misconfigured server headers, this standard
+output lacks the depth needed for root-cause analysis.</p>
+<p><code>wget</code> offers built-in command-line options that alter its
+output behavior, ranging from completely silent to highly detailed
+debugging streams.</p>
+<h2 id="the-primary-verbose-and-debug-flags">The Primary Verbose and
+Debug Flags</h2>
+<p>To get the most information out of <code>wget</code>, you can use two
+primary flags: <code>--verbose</code> (or <code>-v</code>) and
+<code>--debug</code> (or <code>-d</code>).</p>
+<h3 id="1-the-verbose-flag--v-or---verbose">1. The Verbose Flag
+(<code>-v</code> or <code>--verbose</code>)</h3>
+<p>This is actually the default behavior for <code>wget</code> in many
+environments, but explicitly invoking it ensures that all available
+standard log information is printed to the screen. If <code>wget</code>
+has been configured to run quietly in a script, adding <code>-v</code>
+restores the full default reporting.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--verbose</span> https://example.com/file.zip</span></code></pre></div>
+<h3 id="2-the-debug-flag--d-or---debug">2. The Debug Flag
+(<code>-d</code> or <code>--debug</code>)</h3>
+<p>For true debugging, the <code>--debug</code> flag is the most
+powerful tool. It displays full HTTP request and response headers,
+cookie exchanges, and detailed server interaction data.</p>
+<blockquote>
+<p><strong>Note:</strong> If your system's version of <code>wget</code>
+was compiled without debug support, the <code>-d</code> flag will not
+work. Most standard Linux distributions (like Ubuntu, Debian, CentOS,
+and Fedora) include debug support by default.</p>
+</blockquote>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-d</span> https://example.com/file.zip</span></code></pre></div>
+<h2 id="combining-flags-for-comprehensive-troubleshooting">Combining
+Flags for Comprehensive Troubleshooting</h2>
+<p>When diagnosing complex network issues, combining the debug flag with
+other specific options allows you to pinpoint exactly where a transfer
+is failing.</p>
+<h3 id="view-server-headers-only">View Server Headers Only</h3>
+<p>If you only want to inspect the HTTP headers sent by the server
+without downloading the actual file payload, combine the debug flag with
+the spider flag (<code>--spider</code>). This forces <code>wget</code>
+to act like a web scraper that checks file existence without saving
+it.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-d</span> <span class="at">--spider</span> https://example.com/file.zip</span></code></pre></div>
+<h3 id="saving-verbose-output-to-a-log-file">Saving Verbose Output to a
+Log File</h3>
+<p>Verbose and debug outputs can generate hundreds of lines of text,
+making them difficult to read in a standard terminal window. You can
+redirect this output to a dedicated log file using the <code>-o</code>
+or <code>--output-file</code> option.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-d</span> <span class="at">-o</span> wget_debug.log https://example.com/file.zip</span></code></pre></div>
+<h2 id="key-elements-to-look-for-in-verbose-output">Key Elements to Look
+For in Verbose Output</h2>
+<p>Once you generate a verbose log, focus on the following sections to
+resolve your issue:</p>
+<ul>
+<li><strong>Connecting to...</strong> – Shows the exact IP address and
+port <code>wget</code> is trying to reach. Helpful for identifying DNS
+resolution or firewall issues.</li>
+<li>---request_beginning--- – Contains the exact HTTP request headers
+sent by <code>wget</code> to the host server, including User-Agent
+string and authorization tokens.</li>
+<li>---request_end--- – Marks the end of the client-side request
+transmission.</li>
+<li><strong>HTTP/1.1 200 OK (or other status codes)</strong> – The
+direct response from the server. Look for codes like
+<code>403 Forbidden</code> (permissions issue),
+<code>404 Not Found</code> (wrong URL), or
+<code>500 Internal Server Error</code> (host-side issue).</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

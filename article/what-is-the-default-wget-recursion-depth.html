@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is the Default Wget Recursion Depth? - wget</title>
+    <meta name="description" content="When downloading a website recursively using the wget command-line utility, the tool automatically follows links to a specific maximum depth to prevent infinite loops and excessive bandwidth consumption. By default, the default recursion depth limit for">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/what-is-the-default-wget-recursion-depth">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What is the Default Wget Recursion Depth? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/what-is-the-default-wget-recursion-depth" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When downloading a website recursively using the wget command-line utility, the tool automatically follows links to a specific maximum depth to prevent infinite loops and excessive bandwidth consumption. By default, the default recursion depth limit for" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="what-is-the-default-wget-recursion-depth">What is the Default
+Wget Recursion Depth?</h1>
+<p>When downloading a website recursively using the <code>wget</code>
+command-line utility, the tool automatically follows links to a specific
+maximum depth to prevent infinite loops and excessive bandwidth
+consumption. By default, <strong>the default recursion depth limit for
+<code>wget</code> is 5</strong>. This means that if you initiate a
+recursive download using the <code>-r</code> or <code>--recursive</code>
+flag without specifying a custom depth, <code>wget</code> will only
+follow links up to five levels deep from the original URL. Understanding
+this default behavior is crucial for ensuring you capture all necessary
+web pages without unintentionally leaving out deeply nested content.</p>
+<h3 id="understanding-the-5-level-depth-limit">Understanding the 5-Level
+Depth Limit</h3>
+<p>To visualize how <code>wget</code> navigates a website by default,
+consider the structure of a site's directories and links:</p>
+<ul>
+<li><strong>Depth 0:</strong> The initial URL provided in the command
+(e.g., <code>https://example.com</code>).</li>
+<li><strong>Depth 1:</strong> Pages directly linked from the initial
+URL.</li>
+<li><strong>Depth 2:</strong> Pages linked from Depth 1 pages.</li>
+<li><strong>Depth 3:</strong> Pages linked from Depth 2 pages.</li>
+<li><strong>Depth 4:</strong> Pages linked from Depth 3 pages.</li>
+<li><strong>Depth 5:</strong> The final level of pages <code>wget</code>
+will fetch by default. Any links found on Depth 5 pages will be
+ignored.</li>
+</ul>
+<h3 id="how-to-change-the-recursion-depth">How to Change the Recursion
+Depth</h3>
+<p>If the default limit of 5 is either too shallow to capture the entire
+website or too deep for your specific needs, you can easily modify this
+behavior using the <code>-l</code> or <code>--level</code> option.</p>
+<ul>
+<li><strong>Increase or Decrease Depth:</strong> To specify a exact
+maximum depth, append <code>-l</code> followed by the desired number.
+For example, to set the depth to 3 levels:
+<code>wget -r -l 3 https://example.com</code></li>
+<li><strong>Infinite Recursion:</strong> If you want to download the
+entire website regardless of how deeply nested the pages are, you can
+set the depth to infinite. This is done by using <code>0</code> or
+<code>inf</code> as the argument:
+<code>wget -r -l 0 https://example.com</code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Use infinite recursion with caution. On large
+websites, setting the level to infinite can result in massive downloads,
+high disk space usage, and potential IP blocking from the host server if
+the traffic resembles a denial-of-service attack.</p>
+</blockquote></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

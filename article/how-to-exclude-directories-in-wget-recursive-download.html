@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Exclude Directories in Wget Recursive Download? - wget</title>
+    <meta name="description" content="When downloading websites or large repositories recursively using the wget command-line tool, you often want to skip specific folders like asset libraries, logs, or private directories. This article provides a quick guide on how to use the --reject-regex">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-exclude-directories-in-wget-recursive-download">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Exclude Directories in Wget Recursive Download? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-exclude-directories-in-wget-recursive-download" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When downloading websites or large repositories recursively using the wget command-line tool, you often want to skip specific folders like asset libraries, logs, or private directories. This article provides a quick guide on how to use the --reject-regex" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-exclude-directories-in-wget-recursive-download">How to
+Exclude Directories in Wget Recursive Download?</h1>
+<p>When downloading websites or large repositories recursively using the
+<code>wget</code> command-line tool, you often want to skip specific
+folders like asset libraries, logs, or private directories. This article
+provides a quick guide on how to use the <code>--reject-regex</code>,
+<code>-X</code> (<code>--exclude-directories</code>), and
+<code>--no-parent</code> flags to precisely control which directories
+are ignored during a recursive download, saving you bandwidth and
+storage space.</p>
+<h3 id="the-standard-method-using-the--x-flag">The Standard Method:
+Using the <code>-X</code> Flag</h3>
+<p>The most common way to exclude specific directories during a
+recursive download is by using the <code>-X</code> (or
+<code>--exclude-directories</code>) option. This flag accepts a
+comma-separated list of directories that you want <code>wget</code> to
+skip.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-r</span> <span class="at">-X</span> /themes,/plugins https://example.com</span></code></pre></div>
+<p>In this example:</p>
+<ul>
+<li><code>-r</code> enables recursive downloading.</li>
+<li><code>-X /themes,/plugins</code> instructs <code>wget</code> to
+completely ignore those specific paths on the server.</li>
+</ul>
+<blockquote>
+<p><strong>Important Note:</strong> The directory paths passed to the
+<code>-X</code> flag must be relative to the root of the domain or host,
+starting with a forward slash (<code>/</code>), even if you are starting
+the download from a subfolder.</p>
+</blockquote>
+<h3 id="excluding-directories-with-wildcards">Excluding Directories with
+Wildcards</h3>
+<p>If you want to exclude directories that follow a certain naming
+pattern, you can use basic wildcards (like <code>*</code>) within the
+<code>-X</code> flag.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-r</span> <span class="at">-X</span> <span class="st">&quot;/*/images,/*/backup*&quot;</span> https://example.com</span></code></pre></div>
+<p>When using wildcards, always enclose the directory list in quotes to
+prevent your local shell from expanding the asterisks before the command
+is sent to <code>wget</code>.</p>
+<h3 id="advanced-filtering-with-regular-expressions">Advanced Filtering
+with Regular Expressions</h3>
+<p>For highly specific or complex exclusion rules, <code>wget</code>
+supports regular expressions via the <code>--reject-regex</code> flag.
+This is incredibly useful if you want to skip directories that match a
+specific pattern regardless of where they sit in the folder
+hierarchy.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-r</span> <span class="at">--reject-regex</span> <span class="st">&quot;(dev|test|private)/&quot;</span> https://example.com</span></code></pre></div>
+<p>This command will skip any directory named <code>dev</code>,
+<code>test</code>, or <code>private</code> anywhere in the URL path
+structure during the recursive crawl.</p>
+<h3 id="preventing-upward-navigation-with---no-parent">Preventing Upward
+Navigation with <code>--no-parent</code></h3>
+<p>A common issue during recursive downloads is <code>wget</code>
+following links that lead to a parent directory, inadvertently
+downloading the entire server. To restrict the download strictly to the
+current directory and its subdirectories, combine your commands with the
+<code>-np</code> (or <code>--no-parent</code>) flag.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-r</span> <span class="at">-np</span> <span class="at">-X</span> /blog/archive https://example.com/blog/</span></code></pre></div>
+<p>By combining <code>-np</code> with <code>-X</code>, you ensure that
+<code>wget</code> only moves deeper into the <code>/blog/</code>
+structure while successfully skipping the <code>/blog/archive</code>
+folder.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

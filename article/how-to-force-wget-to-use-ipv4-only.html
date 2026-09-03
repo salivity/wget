@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Force wget to Use IPv4 Only? - wget</title>
+    <meta name="description" content="When downloading files via the command line, you may encounter networking issues where a server prefers IPv6, but your local network or ISP doesn't properly support it. This can cause the wget command to hang, time out, or fail entirely. This article pro">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-force-wget-to-use-ipv4-only">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Force wget to Use IPv4 Only? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-force-wget-to-use-ipv4-only" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When downloading files via the command line, you may encounter networking issues where a server prefers IPv6, but your local network or ISP doesn't properly support it. This can cause the wget command to hang, time out, or fail entirely. This article pro" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-force-wget-to-use-ipv4-only">How to Force wget to Use
+IPv4 Only?</h1>
+<p>When downloading files via the command line, you may encounter
+networking issues where a server prefers IPv6, but your local network or
+ISP doesn't properly support it. This can cause the <code>wget</code>
+command to hang, time out, or fail entirely. This article provides a
+quick overview of how to force <code>wget</code> to connect using only
+IPv4 protocols, covering the temporary command-line flag, a permanent
+configuration fix, and troubleshooting steps to ensure a smooth download
+process.</p>
+<h2 id="the-quick-command-line-solution">The Quick Command Line
+Solution</h2>
+<p>The fastest way to force <code>wget</code> to use IPv4 for a single
+download is to use the <code>-4</code> flag (or its long-form
+equivalent, <code>--inet4-only</code>). This tells the utility to
+completely ignore any IPv6 addresses associated with the domain
+name.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-4</span> https://example.com/file.zip</span></code></pre></div>
+<p>Alternatively, you can use the long-form version of the command:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--inet4-only</span> https://example.com/file.zip</span></code></pre></div>
+<p>Using this flag resolves the common issue where <code>wget</code>
+gets stuck on the "Connecting to..." stage because it is trying to route
+traffic through an unconfigured IPv6 tunnel.</p>
+<h2 id="making-the-ipv4-preference-permanent">Making the IPv4 Preference
+Permanent</h2>
+<p>If you find yourself constantly adding the <code>-4</code> flag
+because your network environment lacks stable IPv6 routing, you can make
+this behavior the default by modifying your <code>wget</code>
+configuration file (<code>.wgetrc</code>).</p>
+<h3 id="step-1-open-or-create-the-configuration-file">Step 1: Open or
+Create the Configuration File</h3>
+<p>Open the <code>wget</code> configuration file in your home directory
+using a text editor like <code>nano</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.wgetrc</span></code></pre></div>
+<h3 id="step-2-add-the-prefer-family-directive">Step 2: Add the Prefer
+Family Directive</h3>
+<p>Add the following line to the file, which instructs <code>wget</code>
+to always prefer or restrict connections to IPv4 addresses:</p>
+<pre class="text"><code>prefer_family = IPv4
+</code></pre>
+<h3 id="step-3-save-and-exit">Step 3: Save and Exit</h3>
+<p>Save the file and exit the editor. From this point forward, running a
+standard <code>wget</code> command will automatically favor IPv4
+connections without requiring you to manually type the flag every
+time.</p>
+<h2 id="verification-and-troubleshooting">Verification and
+Troubleshooting</h2>
+<p>To verify that your command is working as intended, look at the
+terminal output immediately after initiating the download.</p>
+<ul>
+<li><strong>Successful IPv4 connection:</strong> The terminal will
+display a resolving message followed by a standard dotted-quad IP
+address (e.g.,
+<code>Connecting to example.com (example.com)|192.0.2.1|:443... connected.</code>).</li>
+<li><strong>IPv6 connection (unwanted):</strong> If you see a
+hexadecimal address containing colons (e.g., <code>2001:db8::1</code>),
+the restriction was not applied correctly.</li>
+</ul>
+<p>If <code>wget</code> still fails after forcing IPv4, the issue likely
+stems from a broader local network misconfiguration, a DNS resolution
+failure, or the remote server being temporarily offline rather than an
+IP protocol mismatch.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

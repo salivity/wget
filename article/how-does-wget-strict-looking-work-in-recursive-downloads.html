@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does Wget Strict-Looking Work in Recursive Downloads? - wget</title>
+    <meta name="description" content="The --strict-comments option in wget directly influences how the tool parses HTML comments during recursive downloads, strictly enforcing the W3C specification for comment boundaries. By default, wget uses a relaxed parsing method that can sometimes mist">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-does-wget-strict-looking-work-in-recursive-downloads">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Does Wget Strict-Looking Work in Recursive Downloads? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-does-wget-strict-looking-work-in-recursive-downloads" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The --strict-comments option in wget directly influences how the tool parses HTML comments during recursive downloads, strictly enforcing the W3C specification for comment boundaries. By default, wget uses a relaxed parsing method that can sometimes mist" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-does-wget-strict-looking-work-in-recursive-downloads">How
+Does Wget Strict-Looking Work in Recursive Downloads?</h1>
+<p>The <code>--strict-comments</code> option in <code>wget</code>
+directly influences how the tool parses HTML comments during recursive
+downloads, strictly enforcing the W3C specification for comment
+boundaries. By default, <code>wget</code> uses a relaxed parsing method
+that can sometimes mistake regular text for comments or vice versa,
+potentially causing it to miss valid hyperlinks embedded in the code.
+Activating this option ensures that <code>wget</code> only ignores text
+that perfectly conforms to strict HTML comment rules, thereby altering
+which URLs are discovered and followed during a recursive site
+crawl.</p>
+<h2 id="understanding-wgets-default-html-parsing">Understanding Wget's
+Default HTML Parsing</h2>
+<p>When you initiate a recursive download using <code>wget -r</code>,
+the tool downloads a page, parses its HTML content to find hyperlinks
+(like <code>&lt;a href="..."&gt;</code>), and then adds those links to
+its download queue.</p>
+<p>By default, <code>wget</code> is highly forgiving of poorly formatted
+HTML. This "loose" parsing extends to how it handles HTML comments (``).
+In standard browsing, many web engines skip over malformed comments to
+render the page anyway. <code>wget</code> tries to mimic this tolerance,
+but its default parser can sometimes get confused by complex scripts,
+inline style tags, or nested hyphens inside a webpage, leading it to
+prematurely stop scanning parts of the document for downloadable
+links.</p>
+<h2 id="the-role-of-the-strict-option">The Role of the Strict
+Option</h2>
+<p>When you append the <code>--strict-comments</code> flag to your
+command, you instruct <code>wget</code> to switch from its flexible,
+error-tolerant parsing mode to a strict compliance mode.</p>
+<h3 id="accurate-link-discovery">Accurate Link Discovery</h3>
+<p>Under strict parsing, <code>wget</code> adheres to the exact
+SGML/HTML rules where comments are delimited precisely by pairs of
+hyphens. If a web developer utilized non-standard comment formatting,
+the default <code>wget</code> settings might mistakenly classify actual
+page content—including important URLs—as part of a giant, unparsed
+comment. Enabling strict parsing forces <code>wget</code> to look past
+the sloppy syntax, recognize the text as active HTML, and successfully
+discover the links inside it.</p>
+<h3 id="preventing-false-positives">Preventing False Positives</h3>
+<p>Conversely, if a page contains text that looks vaguely like a comment
+but isn't meant to be one, default <code>wget</code> might skip it. The
+strict option ensures that text is only ignored if it matches the formal
+definition of an HTML comment. This prevents <code>wget</code> from
+accidentally skipping legitimate sections of a webpage during its
+recursive sweep.</p>
+<h2 id="impact-on-recursive-download-outcomes">Impact on Recursive
+Download Outcomes</h2>
+<p>Using this option can lead to two distinct outcomes depending on how
+the target website was coded:</p>
+<ul>
+<li><strong>Expanded Scrapes:</strong> You may find that
+<code>wget</code> downloads significantly more files than it did without
+the flag, because it successfully parsed links that were previously
+trapped inside poorly formatted, pseudo-comment blocks.</li>
+<li><strong>Restricted Scrapes:</strong> In rare cases where valid links
+were accidentally exposed by loose parsing but should have been hidden,
+strict mode will properly ignore them, resulting in a cleaner, more
+accurate mirror of the intended site structure.</li>
+</ul>
+<p>If you notice that your recursive downloads are missing entire
+sections of a website, or if <code>wget</code> seems to stop scanning a
+page unexpectedly, enabling <code>--strict-comments</code> is an
+effective troubleshooting step to align the tool's parser with the exact
+structural layout of the source code.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

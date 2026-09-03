@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use Wget for HTTP PUT and DELETE Requests - wget</title>
+    <meta name="description" content="While wget is primarily celebrated for downloading files and mirroring websites, it is fully capable of executing advanced HTTP methods like PUT and DELETE. This article provides a quick, practical overview of how to override wget's default GET behavior">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-use-wget-for-http-put-and-delete-requests">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Use Wget for HTTP PUT and DELETE Requests - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-use-wget-for-http-put-and-delete-requests" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="While wget is primarily celebrated for downloading files and mirroring websites, it is fully capable of executing advanced HTTP methods like PUT and DELETE. This article provides a quick, practical overview of how to override wget's default GET behavior" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-use-wget-for-http-put-and-delete-requests">How to Use
+Wget for HTTP PUT and DELETE Requests</h1>
+<p>While <code>wget</code> is primarily celebrated for downloading files
+and mirroring websites, it is fully capable of executing advanced HTTP
+methods like <strong>PUT</strong> and <strong>DELETE</strong>. This
+article provides a quick, practical overview of how to override
+<code>wget</code>'s default GET behavior using specific command-line
+flags. You will learn the exact syntax required to send custom HTTP
+methods, pass data payloads, and interact with RESTful APIs directly
+from your terminal.</p>
+<h3 id="using-wget-for-http-put-requests">Using Wget for HTTP PUT
+Requests</h3>
+<p>The HTTP PUT method is typically used to upload a file or update an
+existing resource on a server. Since <code>wget</code> does not have a
+dedicated <code>--method=PUT</code> flag in older versions, the most
+universally compatible way to achieve this is by using the
+<code>--post-file</code> or <code>--post-data</code> flags, combined
+with the <code>--custom-request</code> option to change the method
+name.</p>
+<p>To send a file using a PUT request, use the following syntax:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--custom-request</span><span class="op">=</span>PUT <span class="at">--post-file</span><span class="op">=</span><span class="st">&quot;/path/to/local/file.json&quot;</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;Content-Type: application/json&quot;</span> http://example.com/api/resource/1</span></code></pre></div>
+<p>If you prefer to send a raw string of data directly from the command
+line instead of a file, swap <code>--post-file</code> for
+<code>--post-data</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--custom-request</span><span class="op">=</span>PUT <span class="at">--post-data</span><span class="op">=</span><span class="st">&#39;{&quot;status&quot;:&quot;active&quot;}&#39;</span> <span class="at">--header</span><span class="op">=</span><span class="st">&quot;Content-Type: application/json&quot;</span> http://example.com/api/resource/1</span></code></pre></div>
+<ul>
+<li><strong><code>--custom-request=PUT</code></strong>: Forces
+<code>wget</code> to change the HTTP request header line from POST to
+PUT.</li>
+<li>**<code>--post-file</code> / <code>--post-data**</code>: Triggers
+<code>wget</code> to support a payload delivery mechanism and correctly
+calculate content length.</li>
+<li><strong><code>--header</code></strong>: Ensures the receiving server
+understands how to parse the incoming data.</li>
+</ul>
+<h3 id="using-wget-for-http-delete-requests">Using Wget for HTTP DELETE
+Requests</h3>
+<p>The HTTP DELETE method requests that the origin server delete the
+resource identified by the Request-URI. This is much simpler to execute
+than a PUT request because it rarely requires a data payload.</p>
+<p>To issue a quick DELETE request to an API endpoint, use the
+<code>--custom-request</code> flag:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--custom-request</span><span class="op">=</span>DELETE http://example.com/api/resource/1</span></code></pre></div>
+<p>By default, <code>wget</code> will save the server's response (even
+if it is just a "200 OK" or "204 No Content" confirmation) into a file
+in your current directory. If you want to suppress this behavior and
+keep your workspace clean, you can redirect the output to the system
+trash using the <code>-O</code> flag:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--custom-request</span><span class="op">=</span>DELETE <span class="at">-O</span> /dev/null http://example.com/api/resource/1</span></code></pre></div>
+<h3 id="important-considerations-and-troubleshooting">Important
+Considerations and Troubleshooting</h3>
+<p>While <code>wget</code> can get the job done in a pinch, it behaves
+strictly as a file-downloading utility at its core. Keep these behaviors
+in mind when using it for API testing:</p>
+<ul>
+<li><strong>Handling Redirects</strong>: If a PUT or DELETE request
+triggers a 301 or 302 redirect, <code>wget</code> may automatically
+change the subsequent request back to a standard GET method when
+following the new URL.</li>
+<li><strong>Output Files</strong>: Every time you run a custom
+<code>wget</code> request, it creates a file like
+<code>index.html</code> or <code>resource.1</code> locally. Always use
+<code>-O-</code> to view the response in the terminal, or
+<code>-O /dev/null</code> to discard it.</li>
+<li><strong>The cURL Alternative</strong>: For complex API interactions
+involving PUT and DELETE, the <code>curl</code> tool is generally
+preferred by developers (e.g.,
+<code>curl -X DELETE http://example.com</code>). However, knowing the
+<code>wget --custom-request</code> syntax ensures you can interact with
+REST APIs on any minimal Linux environment where <code>curl</code> might
+not be pre-installed.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

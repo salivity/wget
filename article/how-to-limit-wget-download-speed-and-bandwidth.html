@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Limit Wget Download Speed and Bandwidth? - wget</title>
+    <meta name="description" content="This article provides a quick overview and step-by-step guide on how to restrict the download speed and bandwidth usage of the wget command-line utility. When downloading large files, wget can easily consume your entire network bandwidth, causing slowdow">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-limit-wget-download-speed-and-bandwidth">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Limit Wget Download Speed and Bandwidth? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-limit-wget-download-speed-and-bandwidth" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a quick overview and step-by-step guide on how to restrict the download speed and bandwidth usage of the wget command-line utility. When downloading large files, wget can easily consume your entire network bandwidth, causing slowdow" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-limit-wget-download-speed-and-bandwidth">How to Limit
+Wget Download Speed and Bandwidth?</h1>
+<p>This article provides a quick overview and step-by-step guide on how
+to restrict the download speed and bandwidth usage of the
+<code>wget</code> command-line utility. When downloading large files,
+<code>wget</code> can easily consume your entire network bandwidth,
+causing slowdowns for other applications and devices. By utilizing the
+built-in <code>--limit-rate</code> option, you can precisely control the
+maximum download speed, schedule lower-impact transfers, and maintain a
+stable network environment.</p>
+<h2 id="understanding-the---limit-rate-option">Understanding the
+<code>--limit-rate</code> Option</h2>
+<p>The primary method for restricting bandwidth in <code>wget</code> is
+the <code>--limit-rate</code> flag. This option tells <code>wget</code>
+to cap its average download speed to a specific amount per second. It is
+highly flexible and accepts various suffixes to denote the speed
+limit:</p>
+<ul>
+<li><strong><code>k</code> or <code>m</code>:</strong> Represents
+kilobytes per second (KB/s) or megabytes per second (MB/s).</li>
+<li><strong>Decimal values:</strong> You can use values like
+<code>2.5m</code> if your version of <code>wget</code> supports it,
+though whole numbers are standard.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <code>wget</code> implements this limit by
+sleeping the appropriate amount of time after a network read, rather
+than throttling the actual TCP connection at a hardware level. As a
+result, you might see brief spikes in speed at the very beginning of a
+download before the throttling adjusts.</p>
+</blockquote>
+<h2 id="basic-syntax-and-examples">Basic Syntax and Examples</h2>
+<p>To enforce a speed limit, append the <code>--limit-rate</code> flag
+followed by your desired speed to your standard <code>wget</code>
+command.</p>
+<h3 id="limiting-speed-to-kilobytes-per-second">Limiting Speed to
+Kilobytes per Second</h3>
+<p>If you want to restrict a download to <strong>500 KB/s</strong>, use
+the following syntax:</p>
+<p><code>wget --limit-rate=500k http://example.com/largefile.zip</code></p>
+<h3 id="limiting-speed-to-megabytes-per-second">Limiting Speed to
+Megabytes per Second</h3>
+<p>To cap a high-speed download at a maximum of <strong>2 MB/s</strong>,
+use the <code>m</code> suffix:</p>
+<p><code>wget --limit-rate=2m http://example.com/movie.iso</code></p>
+<h2 id="advanced-bandwidth-management-techniques">Advanced Bandwidth
+Management Techniques</h2>
+<p>Beyond simply capping the speed of a single foreground download, you
+can combine the limit feature with other <code>wget</code> flags to
+manage background tasks and script automations efficiently.</p>
+<h3 id="background-downloading-with-speed-limits">Background Downloading
+with Speed Limits</h3>
+<p>If you are downloading a massive file and want to free up your
+terminal while ensuring the download doesn't hijack your router, combine
+the background flag (<code>-b</code>) with the rate limit:</p>
+<p><code>wget -b --limit-rate=1m http://example.com/backup.tar.gz</code></p>
+<p>This creates a log file (usually <code>wget-log</code>) where you can
+check the progress without interrupting your workflow.</p>
+<h3 id="creating-a-permanent-speed-limit-configuration">Creating a
+Permanent Speed Limit Configuration</h3>
+<p>If you routinely operate on a slow or metered connection, you can set
+a permanent download ceiling so you do not have to type the flag every
+time. This is done by editing the <code>wget</code> runtime
+configuration file.</p>
+<ol type="1">
+<li>Open your user configuration file (usually located at
+<code>~/.wgetrc</code>) in a text editor.</li>
+<li>Add the following line to the file:
+<code>limit_rate = 200k</code></li>
+<li>Save and close the file.</li>
+</ol>
+<p>Once saved, every standard <code>wget</code> command you run will
+automatically be throttled to 200 KB/s unless you explicitly override it
+in the command line.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

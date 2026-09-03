@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can wget Execute Commands After Downloading? - wget</title>
+    <meta name="description" content="This article explores whether the popular command-line utility wget has a built-in mechanism to execute external scripts or commands immediately after a file finishes downloading. While wget itself lacks a direct "post-download execute" flag, you will le">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/can-wget-execute-commands-after-downloading">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Can wget Execute Commands After Downloading? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/can-wget-execute-commands-after-downloading" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explores whether the popular command-line utility wget has a built-in mechanism to execute external scripts or commands immediately after a file finishes downloading. While wget itself lacks a direct "post-download execute" flag, you will le" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="can-wget-execute-commands-after-downloading">Can wget Execute
+Commands After Downloading?</h1>
+<p>This article explores whether the popular command-line utility
+<code>wget</code> has a built-in mechanism to execute external scripts
+or commands immediately after a file finishes downloading. While
+<code>wget</code> itself lacks a direct "post-download execute" flag,
+you will learn how to easily achieve this functionality using standard
+command-line chaining techniques, shell scripts, and automation
+tools.</p>
+<h2 id="understanding-wgets-direct-capabilities">Understanding Wget's
+Direct Capabilities</h2>
+<p>The short answer is <strong>no</strong>; <code>wget</code> does not
+possess a native command-line option (like <code>--exec</code> or
+<code>--on-completion</code>) to trigger an external script or command
+once a download wraps up. <code>wget</code> is strictly designed as a
+network downloader. Its primary job is to fetch content via HTTP, HTTPS,
+and FTP, log the progress, and save the data to your disk.</p>
+<p>Because it adheres to the Unix philosophy of "doing one thing and
+doing it well," it leaves task scheduling and process sequencing to the
+shell environment.</p>
+<h2 id="how-to-execute-commands-after-wget-finishes">How to Execute
+Commands After Wget Finishes</h2>
+<p>Even though <code>wget</code> won't run your scripts natively, you
+can easily control the execution flow using your terminal's shell
+features. Here are the most common and effective ways to run a command
+or script right after <code>wget</code> completes its task.</p>
+<h3 id="1-sequential-execution-the--operator">1. Sequential Execution
+(The <code>&amp;&amp;</code> Operator)</h3>
+<p>If you want your command or script to run <strong>only if the
+download succeeds</strong>, use the logical <code>AND</code> operator
+(<code>&amp;&amp;</code>). This checks the exit status of
+<code>wget</code>. If <code>wget</code> returns a success code (0), the
+next command executes immediately.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://example.com/file.zip <span class="kw">&amp;&amp;</span> <span class="fu">unzip</span> file.zip</span></code></pre></div>
+<p>In this example, <code>file.zip</code> will extract only if it was
+downloaded completely and without errors.</p>
+<h3 id="2-unconditional-execution-the--operator">2. Unconditional
+Execution (The <code>;</code> Operator)</h3>
+<p>If you want your script to run <strong>regardless of whether the
+download succeeded or failed</strong>, separate the commands with a
+semicolon (<code>;</code>).</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://example.com/backup.tar.gz <span class="kw">;</span> <span class="ex">./cleanup_script.sh</span></span></code></pre></div>
+<p>Here, <code>cleanup_script.sh</code> runs even if the network dropped
+or the URL returned a 404 error.</p>
+<h3 id="3-piping-directly-to-an-interpreter">3. Piping Directly to an
+Interpreter</h3>
+<p>For specific file types like shell scripts or installer scripts, you
+can download the file and pass it directly to an interpreter using a
+pipe (<code>|</code>). This executes the script without even saving it
+to your hard drive first.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O-</span> https://example.com/install.sh <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
+<blockquote>
+<p><strong>Security Note:</strong> Always verify the source of a script
+before piping it directly into <code>bash</code>, as this can pose a
+significant security risk if the source is untrusted or compromised.</p>
+</blockquote>
+<h2 id="advanced-automation-with-shell-scripts">Advanced Automation with
+Shell Scripts</h2>
+<p>If you need to handle multiple downloads or perform complex logic
+based on the downloaded files, wrapping <code>wget</code> inside a
+wrapper script is the cleanest approach.</p>
+<p>Below is an example of a simple Bash script that downloads a dataset,
+checks if the file exists, and then triggers a Python processing
+script:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">URL</span><span class="op">=</span><span class="st">&quot;https://example.com/data.csv&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT</span><span class="op">=</span><span class="st">&quot;data.csv&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the download</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> <span class="st">&quot;</span><span class="va">$OUTPUT</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$URL</span><span class="st">&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the file was created successfully</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">$OUTPUT</span><span class="st">&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;Download complete. Starting data analysis...&quot;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">python3</span> analyze.py <span class="st">&quot;</span><span class="va">$OUTPUT</span><span class="st">&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;Error: Download failed. Script aborted.&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+<h2 id="alternative-tools-with-native-triggers">Alternative Tools with
+Native Triggers</h2>
+<p>If your workflow absolutely requires a tool that manages its own
+post-download actions natively, you might want to consider alternative
+utilities:</p>
+<ul>
+<li><strong>cURL:</strong> Like <code>wget</code>, <code>curl</code>
+relies on shell chaining (<code>&amp;&amp;</code>), but it handles
+stdout streaming more fluidly for piping into commands.</li>
+<li><strong>aria2:</strong> This is a lightweight, multi-protocol
+download utility that <em>does</em> feature a native trigger. You can
+use the <code>--on-download-complete</code> option to execute a specific
+hook or shell script automatically upon completion.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

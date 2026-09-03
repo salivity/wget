@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Limit Recursion Depth in Wget? - wget</title>
+    <meta name="description" content="When downloading websites recursively using the wget command-line tool, it is easy to accidentally trigger an infinite loop or download far more data than intended. This guide provides a straightforward solution for limiting the recursion depth to a spec">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-limit-recursion-depth-in-wget">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Limit Recursion Depth in Wget? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-limit-recursion-depth-in-wget" />
+    <meta property="og:image:url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When downloading websites recursively using the wget command-line tool, it is easy to accidentally trigger an infinite loop or download far more data than intended. This guide provides a straightforward solution for limiting the recursion depth to a spec" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-limit-recursion-depth-in-wget">How to Limit Recursion
+Depth in Wget?</h1>
+<p>When downloading websites recursively using the <code>wget</code>
+command-line tool, it is easy to accidentally trigger an infinite loop
+or download far more data than intended. This guide provides a
+straightforward solution for limiting the recursion depth to a specific
+number of levels, explains the key command-line flags required, and
+covers best practices for managing web scraping depth effectively.</p>
+<h3 id="the-short-answer-using-the--l-flag">The Short Answer: Using the
+<code>-l</code> Flag</h3>
+<p>The most direct way to control the depth of a recursive download in
+<code>wget</code> is by using the <code>--level</code> option, or its
+short-form counterpart, <code>-l</code>. By default, when you trigger a
+recursive download, <code>wget</code> sets a maximum depth limit of 5
+levels.</p>
+<p>To specify your own limit, use the following syntax:</p>
+<p><code>wget -r -l &lt;depth_number&gt; &lt;URL&gt;</code></p>
+<p>For example, if you only want to download the main page and the pages
+directly linked from it, you would set the depth to 1:</p>
+<p><code>wget -r -l 1 https://example.com</code></p>
+<h3 id="understanding-key-parameters">Understanding Key Parameters</h3>
+<p>To gain full control over your download, it helps to understand how
+these specific flags interact:</p>
+<ul>
+<li><strong><code>-r</code> (Recursive):</strong> This turns on
+recursive downloading, telling <code>wget</code> to follow links found
+on the target page. Without this flag, the depth limit flag has no
+effect.</li>
+<li><strong><code>-l &lt;number&gt;</code> (Level):</strong> This
+specifies the maximum depth. <code>wget</code> starts at depth 0 (the
+initial URL provided). Links found on that initial page are at depth 1,
+links on those pages are at depth 2, and so on.</li>
+<li><strong>Infinite Depth (<code>-l 0</code> or
+<code>-l inf</code>):</strong> If you truly want no depth limit, you can
+pass <code>0</code> or <code>inf</code> as the value. Use this with
+extreme caution, as it can quickly overwhelm your local storage and the
+target server.</li>
+</ul>
+<h3 id="practical-examples-of-depth-control">Practical Examples of Depth
+Control</h3>
+<p>Different scraping scenarios require different levels of depth. Here
+is how to adjust your command based on common needs:</p>
+<table>
+<thead>
+<tr>
+<th>Depth Level</th>
+<th>Command Example</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Depth 1</strong></td>
+<td><code>wget -r -l 1 https://example.com</code></td>
+<td>Grabbing a landing page and its immediate sub-pages only.</td>
+</tr>
+<tr>
+<td><strong>Depth 3</strong></td>
+<td><code>wget -r -l 3 https://example.com</code></td>
+<td>Downloading a specific multi-tiered documentation section.</td>
+</tr>
+<tr>
+<td><strong>Infinite</strong></td>
+<td><code>wget -r -l 0 https://example.com</code></td>
+<td>Full website mirroring (ensure you have permission and space).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="important-safeguards-to-pair-with-recursion-limits">Important
+Safeguards to Pair with Recursion Limits</h3>
+<p>Limiting the depth is a great first step, but deep recursive
+downloads can still cause issues if you don't restrict <code>wget</code>
+from wandering onto external websites.</p>
+<p>To keep your recursive download safe and efficient, consider pairing
+the depth limit with the <strong><code>-np</code> (no-parent)</strong>
+flag. This prevents <code>wget</code> from traveling up to parent
+directories, ensuring you only download files below the specific
+directory level you targeted.</p>
+<p><code>wget -r -l 2 -np https://example.com/blog/</code></p>
+<p>Additionally, using the <strong><code>-H</code> (span hosts)</strong>
+flag carefully is crucial. By default, <code>wget</code> will not follow
+links to different domain names. If you turn on spanning hosts with
+<code>-H</code>, keeping a strict <code>-l</code> depth limit becomes
+absolutely vital to prevent <code>wget</code> from attempting to crawl
+the entire internet.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>
