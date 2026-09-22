@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Change User-Agent in Wget? - wget</title>
+    <meta name="description" content="This article provides a quick overview and practical guide on how to modify or spoof the User-Agent string when using the wget command-line tool. By default, wget identifies itself as "Wget/version", which some web servers block to prevent automated scra">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/how-to-change-user-agent-in-wget">
+    <link rel="search" type="application/opensearchdescription+xml" title="wget" href="/wget/opensearch.xml">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Change User-Agent in Wget? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/how-to-change-user-agent-in-wget" />
+    <meta property="og:image" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a quick overview and practical guide on how to modify or spoof the User-Agent string when using the wget command-line tool. By default, wget identifies itself as "Wget/version", which some web servers block to prevent automated scra" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="how-to-change-user-agent-in-wget">How to Change User-Agent in
+Wget?</h1>
+<p>This article provides a quick overview and practical guide on how to
+modify or spoof the User-Agent string when using the <code>wget</code>
+command-line tool. By default, <code>wget</code> identifies itself as
+"Wget/version", which some web servers block to prevent automated
+scraping. Modifying this string allows you to bypass these restrictions,
+emulate different web browsers, and successfully download the required
+web content.</p>
+<h2 id="using-the---user-agent-option">Using the --user-agent
+Option</h2>
+<p>The most direct way to change the User-Agent string in
+<code>wget</code> is by using the <code>--user-agent</code> option
+followed by the desired string in quotes. This tells the target server
+that the request is coming from a specific browser or device rather than
+a command-line utility.</p>
+<p>For example, to make <code>wget</code> identify itself as a standard
+Google Chrome browser running on Windows, you would use the following
+command:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--user-agent</span><span class="op">=</span><span class="st">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&quot;</span> https://example.com</span></code></pre></div>
+<h3 id="the-short-form-option">The Short Form Option</h3>
+<p>If you prefer shorter commands, you can use the <code>-U</code>
+abbreviation instead of writing out the full <code>--user-agent</code>
+flag. The functionality remains exactly the same:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-U</span> <span class="st">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15&quot;</span> https://example.com</span></code></pre></div>
+<h2 id="making-the-change-permanent">Making the Change Permanent</h2>
+<p>If you find yourself constantly spoofing the User-Agent, you can set
+a default value in your <code>wget</code> configuration file so you do
+not have to type the flag every time.</p>
+<ol type="1">
+<li>Open your personal <code>wget</code> configuration file (usually
+located at <code>~/.wgetrc</code>) in a text editor. If the file does
+not exist, you can create it.</li>
+<li>Add the following line to the file:</li>
+</ol>
+<pre class="text"><code>user_agent = Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0
+</code></pre>
+<ol start="3" type="1">
+<li>Save and close the file. From this point forward, every
+<code>wget</code> command you run will automatically use this Firefox
+User-Agent string unless you manually override it in the terminal.</li>
+</ol></article>
+        <div id="comments-container"></div>
+        <script>
+            const utterancesScript = document.createElement('script');
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

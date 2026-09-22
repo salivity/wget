@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can You Restrict Wget to Specific Directories? - wget</title>
+    <meta name="description" content="When scraping or mirroring a website using wget, you can restrict the tool's traversal path to specific directories by utilizing the -I (or --include-directories) option. This prevents the utility from wandering into unwanted sections of a web server, en">
+    <link rel="canonical" href="https://salivity.github.io/wget/article/can-you-restrict-wget-to-specific-directories">
+    <link rel="search" type="application/opensearchdescription+xml" title="wget" href="/wget/opensearch.xml">
+    <link rel="icon" href="/wget/favicon.ico">
+    <link rel="stylesheet" href="/wget/css/style.css">
+    <link media="print" rel="stylesheet" href="/wget/css/print.css">
+    <script src="/wget/js/fuse.min.js"></script>
+    <script src="/wget/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <script src="/social/social.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Can You Restrict Wget to Specific Directories? - wget" />
+    <meta property="og:url" content="https://salivity.github.io/wget/article/can-you-restrict-wget-to-specific-directories" />
+    <meta property="og:image" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/wget/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="When scraping or mirroring a website using wget, you can restrict the tool's traversal path to specific directories by utilizing the -I (or --include-directories) option. This prevents the utility from wandering into unwanted sections of a web server, en" />
+    <link rel="manifest" href="/wget/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/wget/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>wget</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="/wget/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    <div class="article-layout">
+        <aside id="profile-sidebar" class="profile-column" aria-label="Author Profile"></aside>
+        <div class="article-main-column">
+            <article><h1 id="can-you-restrict-wget-to-specific-directories">Can You Restrict
+Wget to Specific Directories?</h1>
+<p>When scraping or mirroring a website using <code>wget</code>, you can
+restrict the tool's traversal path to specific directories by utilizing
+the <code>-I</code> (or <code>--include-directories</code>) option. This
+prevents the utility from wandering into unwanted sections of a web
+server, ensuring that only the content within your specified paths is
+downloaded. By mirroring the directory structure you explicitly define,
+<code>wget</code> provides a highly targeted approach to automated web
+downloading.</p>
+<h3 id="how-to-use-the-include-directories-option">How to Use the
+Include Directories Option</h3>
+<p>The <code>-I</code> option accepts a comma-separated list of
+directory paths that you want to limit the download to. It is most
+effective when combined with the recursive download flag
+(<code>-r</code> or <code>-m</code>).</p>
+<p>Here is the basic syntax for restricting <code>wget</code> to
+specific paths:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-r</span> <span class="at">-I</span> /directory1,/directory2 http://example.com/</span></code></pre></div>
+<h3 id="key-considerations-for-path-restricting">Key Considerations for
+Path Restricting</h3>
+<p>To ensure the restriction works as intended, keep the following
+behaviors in mind:</p>
+<ul>
+<li><strong>Relative Paths:</strong> The paths specified in the include
+list must be relative to the hostname root. For example, if you want to
+download <code>http://example.com/files/docs/</code>, your include path
+should be <code>/files/docs</code>.</li>
+<li><strong>The Parent Directory Rule:</strong> If you kick off a
+download at a deep sub-directory, <code>wget</code> might still need to
+look at parent directories to find files. Using the <code>-np</code> (or
+<code>--no-parent</code>) flag alongside <code>-I</code> is a common
+best practice to guarantee <code>wget</code> never ascends to a higher
+directory level.</li>
+<li><strong>Combining with Excludes:</strong> If you want to include a
+large directory but skip a specific subfolder within it, you can pair
+the include flag with the <code>-X</code> (or
+<code>--exclude-directories</code>) flag to fine-tune your traversal
+path.</li>
+</ul></article>
+        <div id="comments-container"></div>
+        <script>
+            const utterancesScript = document.createElement('script');
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/wget'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+        </div>
+    </div>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="social-links">
+            </ul>
+        </nav>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/wget/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/wget/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>
